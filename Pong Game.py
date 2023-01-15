@@ -1,5 +1,4 @@
 # Pong Game
-
 import turtle
 import time
 # from paddles import *
@@ -13,12 +12,13 @@ wn.bgcolor("black")
 #change window size 
 wn.setup(width=800, height=600)
 wn.tracer(0) 
+
 #apparently it lets the window to work better through limiting updating
 
 # Score
 score_a = 0
 score_b = 0
-winning_score = 1
+winning_score = 5
 
 # Paddle A
 # paddle_a = Paddle(position=-350)
@@ -91,14 +91,22 @@ def won_msg(player):
 def game_end():
     if score_a == winning_score or score_b == winning_score: 
         pen.clear()
-        ball.dx = 0
-        ball.dy = 0
-        if score_a == winning_score: won_msg("A")
-        elif score_b == winning_score: won_msg("B") 
-        # time.sleep(2)
-        # game_restart()
+        
+        if score_a >= winning_score: 
+            won_msg("A")
+            end_ball_params()
+        elif score_b >= winning_score: 
+            won_msg("B") 
+            end_ball_params()
+
+def end_ball_params():
+    ball.color("black")
+    ball.dx = 0
+    ball.dy = 0 
+
         
 # def game_restart():
+#     ball.color("white")
 #     score_a = 0
 #     score_b = 0
 #     ball.dx = 0.5
@@ -147,10 +155,9 @@ while True:
     if ball.xcor() < -340 and ball.xcor() > -350 and ball.ycor() < paddle_a.ycor()+50 and ball.ycor() > paddle_a.ycor() -50:
         ball.setx(-340)
         ball.dx *= -1
+    
 
     
     
         
-    # ball.move_ball()
 
-    
